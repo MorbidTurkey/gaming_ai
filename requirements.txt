@@ -19,6 +19,10 @@ matplotlib
 aiohttp
 cachetools
 
+# Deployment
+gunicorn
+whitenoise
+
 # Development tools
 black
 pytest

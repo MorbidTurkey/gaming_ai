@@ -17,7 +17,7 @@ from io import BytesIO
 import base64
 import re
 import traceback
-import re
+import os
 
 from agent import GamingChatbotAgent
 from utils.simple_gaming_agent import SimpleGamingAgent
@@ -86,6 +86,9 @@ def _clean_ai_response(response_text):
 # Initialize the Dash app with Bootstrap theme
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG, dbc.icons.BOOTSTRAP])
 app.title = "Gaming AI Chatbot"
+
+# Expose the Flask server for deployment platforms like Render
+server = app.server
 
 # Initialize the chatbot agent
 chatbot = GamingChatbotAgent()
@@ -1349,6 +1352,14 @@ if __name__ == "__main__":
     print("   - SteamSpy statistics")
     print("   - AI-powered responses")
     print("   - Interactive visualizations")
-    print("\n🌐 Access the app at: http://localhost:8050")
     
-    app.run(debug=True, port=8050)
+    # Get port from environment variable for Render deployment
+    # Default to 8050 for local development
+    port = int(os.environ.get("PORT", 8050))
+    
+    # Determine if we're in development or production
+    debug_mode = os.environ.get("ENVIRONMENT", "development") == "development"
+    
+    print(f"\n🌐 Access the app at: http://localhost:{port}")
+    
+    app.run_server(debug=debug_mode, host="0.0.0.0", port=port)
