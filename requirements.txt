@@ -1,0 +1,25 @@
+# Core dependencies
+dash
+dash-bootstrap-components
+dash-core-components
+dash-html-components
+plotly
+pandas
+numpy
+flask
+requests
+python-dotenv
+
+# Visualization and data processing
+colorlover
+openpyxl
+matplotlib
+
+# API integration
+aiohttp
+cachetools
+
+# Development tools
+black
+pytest
+pytest-mock
